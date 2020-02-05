@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task-List: Simple Customization Example</title>
+    <style type="text/css">
+        /*  overwrite the primary color of the task-list webcomponent to the OOP brand color  */
+        task-list {
+            --primary-color: #009ba4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task-List: Simple Customization Example</h1>
+    <task-list></task-list>
+    <script type="text/javascript">
+        //  the task-list webcomponent
+        class TaskList extends HTMLElement {
+            //  the constructor will be invoked for every instance
+            constructor () {
+                super();
+
+                //  attach a shadow DOM
+                this.attachShadow({ mode: 'open' });
+                
+                //  create a style element that only exists in the context of the webcomponent
+                let style = document.createElement('style');
+                style.type = 'text/css';
+                style.textContent = `
+                    :host { --primary-color: #a01441; }
+                    h1 { color: var(--primary-color); }
+                `
+                this.shadowRoot.appendChild(style);
+
+                //  append a headline 1
+                let h1 = document.createElement('h1');
+                h1.textContent = 'Headline 1';
+                this.shadowRoot.appendChild(h1);
+            }
+        }
+        //  auto-define the webcomponent
+        customElements.define('task-list', TaskList);
+    </script>
+</body>
+</html>
