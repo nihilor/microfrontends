@@ -1,8 +1,8 @@
 # Microfrontends.de
 
-Microfrontends are an architectural pattern based on the Unix philosophy. To sum it up in my own words:
+Microfrontends are an architectural pattern based on the Unix philosophy to modularize frontends at a high level. To sum the Unix philosophy up in my own words:
 
-> Do one thing well, work with others, use standardized communication.
+> Do one thing well, work with others, use standardized interfaces.
 
 ## Developing Microfrontends with Webcomponents
 
