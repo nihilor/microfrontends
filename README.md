@@ -6,7 +6,7 @@ Microfrontends are an architectural pattern based on the Unix philosophy to modu
 
 ## Developing Microfrontends with Webcomponents
 
-At the [OOP2020](https://www.oop-konferenz.de/oop2020.html) I held a presentation about why webcomponents are the ideal basis for microfrontends. Please find the slides and an simple example in the subdirectory [/oop2020](/oop2020).
+At the [OOP2020](https://www.oop-konferenz.de/oop2020.html) I held a presentation about why webcomponents are the ideal basis for microfrontends. Please find the slides and a simple example in the subdirectory [/oop2020](/oop2020), one day after the presentation on February, 7th 2020.
 
 ## Podcast: Microfrontends
 
