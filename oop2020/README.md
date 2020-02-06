@@ -4,9 +4,10 @@
 
 ## Definition
 
-My definition of micro-frontends is:
+My definition of microfrontends:
 
-> Microfrontends are self-contained software elements, composable to and integrateable into frontends – independently of the frontends architecture, technology stack, and functionality.
+> Microfrontends are self-contained software elements, composable to and integrateable into frontends – independently of the frontends architecture, technology stack, and functionality.  
+&ndash; Mark Lubkowitz
 
 ## Why Microfrontends?
 
