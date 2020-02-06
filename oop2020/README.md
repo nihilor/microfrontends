@@ -64,6 +64,16 @@ Microfrontends must be registerable, instantiatable, configurable, instructable,
 * Using prefixes, suffixes and dashes it‘s possible to establish a namespace convention – and must be done.
 * Webcomponents can register themselves, or can be registered by other components.
 
+```javascript
+//  declare a new custom element based on HTML element
+class TaskList extends HTMLElement {
+    //  ...
+}
+
+//  register the custom element
+customElements.define('task-list', TaskList);
+```
+
 ### Instantiatable
 
 * Webcomponents can be instantiated in two ways. First declaratively via HTML by writing down the Custom Elements name.
@@ -71,6 +81,21 @@ Microfrontends must be registerable, instantiatable, configurable, instructable,
 * Webcomponents always call a constructor on instantiation.
 * It‘s possible to create multiple instances of the same Custom Element in the same context.
 * Using the constructor and dynamically loading the codebase makes versioning and more possible.
+
+```html
+<html>
+    <body>
+        <!-- 1. declarative -->
+        <task-list id="personal"></task-list>
+        <!-- 2. imperative -->
+        <script type="text/javascript">
+            let taskList = document.createElement('task-list');
+            taskList.id = 'business';
+            document.appendChild(taskList);
+        </script>
+    </body>
+</html>
+```
 
 ### Configurable
 
@@ -80,6 +105,15 @@ Microfrontends must be registerable, instantiatable, configurable, instructable,
 * That enables Microfrontends to react to configuration changes and also expose it.
 * Attributes must only be used for simple and a small amount of data, enforcing a more technical interface.
 
+```html
+<task-list
+     id="private"
+     version="1.0"
+     static="true"
+     local="true"
+></task-list>
+```
+
 ### Instructable
 
 * Webcomponents run in the context of a webbrowser. This provides access to the DOM – the combination of HTML and JavaScript.
@@ -87,6 +121,12 @@ Microfrontends must be registerable, instantiatable, configurable, instructable,
 * The DOM provides access to any element, attributes, and methods. It is a technical, explicit, consistent, and universal interface.
 * Methods are great to instruct the Microfrontends.
 * By invoking the methods of an element on a technical basis, it‘s possible to exchange arbitrary business data without changing the interface.
+
+```javascript
+let taskList = document.getElementById('personal');
+taskList.clear();
+taskList.add('Enjoy the OOP');
+```
 
 ### Observable
 
@@ -96,11 +136,38 @@ Microfrontends must be registerable, instantiatable, configurable, instructable,
 * It‘s possible to establish the publish-subscribe-pattern.
 * The `MutationObserver` – an official language construct – can observe any element and custom element and reacts to any change in the DOM of the element.
 
+```html
+<task-list
+    id="one"
+    onchange="alert(document.getElementById('one').tasks)"
+></task-list>
+```
+
 ### Lifecyclable
 
 * Due to the self-realiability of Microfrontends, a lifecycle is essential for the Microfrontend.
 * Webcomponents provide three language elements that build the basis for a lifecycle: `constructor`, `connectedCallback`, `disconnectedCallback`.
 * `constructor` is invoked on instantiation, `connectedCallback` as soon as the Microfrontend is connected to the DOM, `disconnectedCallback` when the element is dropped.
+
+```javascript
+class TaskList extends HTMLElement {
+    //  ideal for instantiation
+    constructor () {
+    }
+    //  inserted into the DOM
+    connectedCallback () {
+        this.boot();
+    }
+    //  observed attributes changed
+    attributeChangedCallback (a, o, n) {
+        //  ...
+    }
+    //  removed from the DOM
+    disconnectedCallback () {
+        this.stop();
+    }
+}
+```
 
 ### Customizable
 
@@ -109,6 +176,18 @@ Microfrontends must be registerable, instantiatable, configurable, instructable,
 * Style hooks can be realized with CSS Custom Element Properties. 
 * Custom Elements can use CSS selectors to consider their context and to react appropriately. 
 * Slots encourage the principle of composition. Specific elements, components, or even Microfrontends can be injected and used.
+
+```html
+<!-- Frontend -->
+<style type="text/css">
+    task-list { --primary-color: #009ba4; }
+</style>
+<!-- Microfrontend -->
+<style type="text/css">
+    :host { --primary-color: #a01441; }
+    h1 { color: var(--primary-color); }
+</style>
+```
 
 ## Conclusion
 
